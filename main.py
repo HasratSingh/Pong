@@ -41,14 +41,16 @@ while game_not_over:
     ball.move()
     if ball.ycor() > 285 or ball.ycor() < -280:  # When ball hits top or bottom wall
         ball.bounce_wall()
-    elif ball.xcor() > 360 and -50 < ball.ycor() - paddle_right.ycor() < 50:
-        if 0 < ball.heading() < 90 or 270 < ball.heading() < 360:
+    elif ball.xcor() > 360 and -paddle.PADDLE_SIZE/2 < (ball.ycor() - paddle_right.ycor()) < paddle.PADDLE_SIZE/2:
+        if 0 < ball.heading() < 90 or 270 < ball.heading() < 360:  # So that ball changes direction only once
             ball.bounce_paddle()
-    elif ball.xcor() < -360 and -50 < ball.ycor() - paddle_left.ycor() < 50:
-        if 90 < ball.heading() < 270:
+    elif ball.xcor() < -360 and -paddle.PADDLE_SIZE/2 < (ball.ycor() - paddle_left.ycor()) < paddle.PADDLE_SIZE/2:
+        if 90 < ball.heading() < 270:  # So that ball changes direction only once
             ball.bounce_paddle()
-    elif ball.xcor() > 420 or ball.xcor() < -420:
-        ball.reset()
+    elif ball.xcor() > 420:
+        ball.reset_position("left")
+    elif ball.xcor() < -420:
+        ball.reset_position("right")
     sleep(0.01)
     screen.update()
 

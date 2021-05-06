@@ -1,11 +1,12 @@
 from turtle import Turtle
-from random import randint
+from random import randint, choice
 
 
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
-        self.reset()
+        self.reset_position()
+        self.seth(randint(0, 360))  # Initially ball can go towards any side.
 
     def move(self):
         self.fd(3)
@@ -18,9 +19,13 @@ class Ball(Turtle):
         current_angle = self.heading()
         self.seth(180-current_angle)
 
-    def reset(self):
+    def reset_position(self, side="left"):  # If no side is given ball goes towards left
         self.penup()
         self.shape("circle")
         self.color("white")
-        self.seth(randint(0, 360))
         self.goto(0, 0)
+        if side == "right":
+            right_side_range = list(range(0, 90))+list(range(270, 360))  # Angle values for throwing ball to right side
+            self.seth(choice(right_side_range))
+        else:
+            self.seth(randint(90, 270))
