@@ -9,7 +9,7 @@ class Ball(Turtle):
         self.seth(randint(0, 360))  # Initially ball can go towards any side.
 
     def move(self):
-        self.fd(3)
+        self.fd(10)
 
     def bounce_wall(self):
         current_angle = self.heading()
@@ -17,7 +17,12 @@ class Ball(Turtle):
 
     def bounce_paddle(self):
         current_angle = self.heading()
-        self.seth(180-current_angle)
+        if 90 < current_angle < 100:  # Fixes bug in which case ball keeps bouncing between walls.
+            self.seth(0)
+        elif 80 < current_angle < 90: # Fixes bug in which case ball keeps bouncing between walls.
+            self.seth(180)
+        else:
+            self.seth(180-current_angle)
 
     def reset_position(self, side="left"):  # If no side is given ball goes towards left
         self.penup()
