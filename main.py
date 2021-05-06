@@ -11,8 +11,8 @@ screen.title("Pong")
 screen.tracer(False)
 
 # Setup Paddles and Ball
-paddle_right = paddle.Paddle(position=(350, 0))
-paddle_left = paddle.Paddle(position=(-350, 0))
+paddle_right = paddle.Paddle(position=(380, 0))
+paddle_left = paddle.Paddle(position=(-380, 0))
 ball = ball.Ball()
 screen.update()
 
@@ -22,9 +22,11 @@ screen.listen()
 
 def listener(fun, key):
     if key == "up":
-        fun.move_up()
+        if fun.ycor() < 230:
+            fun.move_up()
     else:
-        fun.move_down()
+        if fun.ycor() > -230:
+            fun.move_down()
     screen.update()
 
 
@@ -38,7 +40,11 @@ game_not_over = True
 while game_not_over:
     ball.move()
     if ball.ycor() > 285 or ball.ycor() < -280:  # When ball hits top or bottom wall
-        ball.bounce()
+        ball.bounce_wall()
+    if ball.xcor() > 360 and -50 < ball.ycor()-paddle_right.ycor() < 50:
+        ball.bounce_paddle()
+    elif ball.xcor() < -360 and -50 < ball.ycor()-paddle_left.ycor() < 50:
+        ball.bounce_paddle()
     sleep(0.01)
     screen.update()
 

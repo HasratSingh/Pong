@@ -11,8 +11,12 @@ class Ball(Turtle):
         self.seth(randint(0, 360))
 
     def move(self):
-        self.fd(2)
+        self.fd(3)
 
-    def bounce(self):
+    def bounce_wall(self):
         current_angle = self.heading()
         self.seth(360-current_angle)
+
+    def bounce_paddle(self):
+        current_angle = self.heading()
+        self.seth(180-current_angle)
