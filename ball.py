@@ -19,7 +19,7 @@ class Ball(Turtle):
         current_angle = self.heading()
         if 90 < current_angle < 100:  # Fixes bug in which case ball keeps bouncing between walls.
             self.seth(0)
-        elif 80 < current_angle < 90: # Fixes bug in which case ball keeps bouncing between walls.
+        elif 80 < current_angle < 90:  # Fixes bug in which case ball keeps bouncing between walls.
             self.seth(180)
         else:
             self.seth(180-current_angle)
