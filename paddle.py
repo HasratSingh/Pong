@@ -1,4 +1,5 @@
 from turtle import Turtle
+PADDLE_SPEED = 20
 
 
 class Paddle(Turtle):
@@ -13,7 +14,7 @@ class Paddle(Turtle):
         self.goto(position)
 
     def move_up(self):
-        self.fd(20)
+        self.fd(PADDLE_SPEED)
 
     def move_down(self):
-        self.back(20)
+        self.back(PADDLE_SPEED)

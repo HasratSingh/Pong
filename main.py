@@ -41,10 +41,14 @@ while game_not_over:
     ball.move()
     if ball.ycor() > 285 or ball.ycor() < -280:  # When ball hits top or bottom wall
         ball.bounce_wall()
-    if ball.xcor() > 360 and -50 < ball.ycor()-paddle_right.ycor() < 50:
-        ball.bounce_paddle()
-    elif ball.xcor() < -360 and -50 < ball.ycor()-paddle_left.ycor() < 50:
-        ball.bounce_paddle()
+    elif ball.xcor() > 360 and -50 < ball.ycor() - paddle_right.ycor() < 50:
+        if 0 < ball.heading() < 90 or 270 < ball.heading() < 360:
+            ball.bounce_paddle()
+    elif ball.xcor() < -360 and -50 < ball.ycor() - paddle_left.ycor() < 50:
+        if 90 < ball.heading() < 270:
+            ball.bounce_paddle()
+    elif ball.xcor() > 420 or ball.xcor() < -420:
+        ball.reset()
     sleep(0.01)
     screen.update()
 
